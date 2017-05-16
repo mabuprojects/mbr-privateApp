@@ -1,0 +1,10 @@
+<!--------------------------------------------   CABECERA  --------------------------------------------------->
+<app-nav-bar [title]="openMode==='EDIT'?'Editando':'Nuevo Producto'" [back]="true">
+
+</app-nav-bar>
+
+<app-create-product-step1 [class.hide]="hideStep1" (onSave)="onSaveStep1($event)"></app-create-product-step1>
+
+<app-create-product-step2 [class.hide]="hideStep2" (onBack)="onBackStep2()" (onSave)="onSaveStep2($event)" ></app-create-product-step2>
+
+<app-create-product-step3 [class.hide]="hideStep3"  (onBack)="onBackStep3()" ></app-create-product-step3>

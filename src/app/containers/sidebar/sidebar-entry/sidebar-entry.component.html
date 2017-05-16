@@ -1,0 +1,7 @@
+<a class="collection-item "  [ngClass]="{'short-link':short}"  routerLink="{{link}}" routerLinkActive="active">
+
+  <div class="">
+    <i class="material-icons sidebar-entry center-icon">{{icon}}</i>
+    <span *ngIf="short" class="sidebar-label" [@visibleTrigger]="'visible'">{{name}}</span>
+  </div>
+</a>

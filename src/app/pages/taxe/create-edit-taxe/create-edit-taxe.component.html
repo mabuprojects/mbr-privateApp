@@ -1,0 +1,49 @@
+<!--------------------------------------------   HEADER  --------------------------------------------------->
+<app-nav-bar [title]="openMode==='EDIT'?'Editando':'Nuevo Impuesto'" [back]="true">
+
+</app-nav-bar>
+
+
+<!--------------------------------------------   FORM  --------------------------------------------------->
+
+<form [formGroup]="taxeForm"  novalidate>
+  <div class="row">
+    <div class="input-field col s6">
+      <input id="name" type="text" formControlName="name"
+             [class.valid]="controlValid('name', taxeForm)"
+             [class.invalid]="controlInvalid('name', taxeForm)">
+      <label for="name" data-error="Incorrecto">Name*</label>
+
+    </div>
+
+    <div class="input-field col s6">
+      <input id="value" type="number" formControlName="value"
+             [class.valid]="controlValid('value', taxeForm)"
+             [class.invalid]="controlInvalid('value', taxeForm)">
+      <label for="value" data-error="Incorrecto">Valor*</label>
+
+    </div>
+
+    <!--------------------------------------------   BUTTONS FORM  --------------------------------------------------->
+
+    <div class="col s12">
+
+      <mbr-error-card [(error)]=error [errorMessage]=errorMessage></mbr-error-card>
+
+      <button  (click)="onSubmit()"
+               [disabled]="taxeForm.invalid" class="btn btn-success">Save
+      </button>
+      &nbsp;
+      <button (click)="revert(taxeForm)"
+              [disabled]="taxeForm.pristine" class="btn btn-danger">Revert
+      </button>
+    </div>
+
+  </div>
+</form>
+<!--------------------------------------------   TOASTS  --------------------------------------------------->
+
+<a (click)="triggerToast()" materialize [materializeParams]="['Impuesto creado',4000]"
+   [materializeActions]="toastCreateActions"></a>
+<a (click)="triggerToast()" materialize [materializeParams]="['Impuesto actualizado',4000]"
+   [materializeActions]="toastUpdateActions"></a>

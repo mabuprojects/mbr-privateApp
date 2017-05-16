@@ -1,0 +1,23 @@
+<!--------------------------------------------   HEADER  --------------------------------------------------->
+<app-nav-bar [title]="'Empleados'">
+
+</app-nav-bar>
+
+
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large red">
+    <i class="large material-icons">contacts</i>
+  </a>
+  <ul>
+    <li><a class="btn-floating green" [routerLink]="'new'"><i class="material-icons">add</i></a></li>
+  </ul>
+</div>
+<div class="fluid-container row" style="margin-top: 10px;">
+  <div class="col s12 m3 l3">
+    <app-list-employees></app-list-employees>
+  </div>
+
+  <div class="col s12 m9 l9">
+    <router-outlet></router-outlet>
+  </div>
+</div>

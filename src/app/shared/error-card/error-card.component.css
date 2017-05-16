@@ -1,0 +1,16 @@
+.small-padding {
+  padding: 1em 1em;
+}
+
+.alertButton {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  padding: 0px;
+  margin: 0px;
+  background-color: indianred;
+}
+
+.alertIcon {
+  margin: 0px 5px 0px 5px
+}

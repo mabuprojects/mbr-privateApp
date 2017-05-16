@@ -1,0 +1,52 @@
+<nav>
+  <div class="nav-wrapper nav-bar teal">
+
+    <a materialize="sideNav" style="cursor: pointer" [materializeActions]="sideNavActions" [materializeParams]="[{edge:'left'}]"
+       data-activates="mobile-demo" class="button-collapse hide-on-med-and-up"><i class="material-icons">menu</i></a>
+
+    <a routerLink="/mainpage" class="brand-logo center white-text">{{title}} </a>
+
+    <ul class="left hide-on-small-and-down " style="margin-left: 20px">
+    <li><i *ngIf="back" (click)="backRoute()" class="material-icons big"
+           style="margin-left: -5px; cursor: pointer">keyboard_backspace</i></li></ul>
+
+    <ul class="right hide-on-small-and-down ">
+
+
+      <li><a (click)="fullScreen()"><i class="material-icons right">aspect_ratio</i></a></li>
+      <li><a (click)="logOut()"><i class="material-icons right">power_settings_new</i></a></li>
+
+    </ul>
+
+    <ul class="side-nav" id="mobile-demo">
+
+      <li>
+        <div class="userView">
+          <div class="background">
+            <img src="assets/resources/sidebackground.jpg">
+          </div>
+          <a href="#!user"><img class="circle" src="assets/resources/mabu.svg"></a>
+          <a href="#!name"><span class="white-text name">{{(user | async)?.name}}</span></a>
+          <a href="#!email"><span class="white-text email">{{(user | async)?.email}}</span></a>
+        </div>
+      </li>
+      <li><a (click)="closeSideNav()" routerLink="/mainpage" ><i class="material-icons">dashboard</i>Main Page</a></li>
+      <li><a (click)="closeSideNav()" routerLink="/order" ><i class="material-icons">input</i>Pedidos</a></li>
+      <li><a (click)="closeSideNav()" routerLink="/restaurant" ><i class="material-icons">store</i>Restaurantes</a></li>
+      <li><a (click)="closeSideNav()" routerLink="/product" ><i class="material-icons">list</i>Productos</a></li>
+      <li><a (click)="closeSideNav()" routerLink="/category" ><i class="material-icons">view_quilt</i>Categorias</a></li>
+      <li><a (click)="closeSideNav()" routerLink="/taxe" ><i class="material-icons">payment</i>Impuestos</a></li>
+      <li><a (click)="closeSideNav()" routerLink="/user" ><i class="material-icons">contacts</i>Usuarios</a></li>
+
+      <li class="divider"></li>
+      <li><a (click)="fullScreen()"><i class="material-icons">aspect_ratio</i>Pantalla Completa</a></li>
+      <li class="divider"></li>
+      <li><a (click)="logOut()" ><i class="material-icons">power_settings_new</i>Cerrar Sesión</a></li>
+    </ul>
+
+  </div>
+
+</nav>
+<div style="display: none">
+  <ng-content></ng-content>
+</div>

@@ -1,0 +1,47 @@
+<!--------------------------------------------   HEADER  --------------------------------------------------->
+<app-nav-bar [title]="'Impuestos'">
+
+</app-nav-bar>
+
+
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large red">
+    <i class="large material-icons">payment</i>
+  </a>
+  <ul>
+    <li><a class="btn-floating green" [routerLink]="'/taxe/new'"><i class="material-icons">add</i></a></li>
+    <li><a class="btn-floating blue darken-1" (click)="refresh()" ><i class="material-icons">replay</i></a></li>
+  </ul>
+</div>
+<!--------------------------------------------   DELETE ERROR  --------------------------------------------------->
+
+<mbr-error-card [(error)]=error [errorMessage]=errorMessage></mbr-error-card>
+
+<!--------------------------------------------   TAXES LIST  --------------------------------------------------->
+<div class="col s12 l12 m12">
+  <div class="collection">
+    <a *ngFor="let taxe of taxes | async" class="collection-item">
+      <span class="title">{{taxe.name}}</span>
+      <span>{{taxe.value}}</span>
+
+
+      <button class="btn waves-effect waves-light red small-padding-sides right small-button-list"
+              (click)="deleteTaxe(taxe.id)" type="button">
+        <i class="small material-icons">delete</i>
+      </button>
+
+      <button class="btn waves-effect waves-light blue small-padding-sides right small-button-list"
+              [routerLink]="['/taxe/edit',taxe.name]" type="button">
+        <i class="small material-icons">mode_edit</i>
+      </button>
+
+    </a>
+  </div>
+</div>
+<!--------------------------------------------   TOASTS  --------------------------------------------------->
+
+<a (click)="triggerToast()" materialize [materializeParams]="['Impuesto eliminado',4000]"
+   [materializeActions]="toastDeleteActions"></a>
+
+<a (click)="triggerToast()" materialize [materializeParams]="['Impuestos actualizados',4000]"
+   [materializeActions]="toastUpdateActions"></a>

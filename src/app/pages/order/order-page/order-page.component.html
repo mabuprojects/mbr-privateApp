@@ -1,0 +1,39 @@
+<app-nav-bar [title]="'Pedidos'">
+    <form materialize [formGroup]="restaurantForm">
+      <div class="input-field white-text" style="margin-top: 5px;  margin-bottom: -6px;">
+        <select  formControlName="restaurant" materialize="material_select"  [materializeSelectOptions]="selectOptions">
+          <option *ngFor="let restaurant of restaurants | async" [value]="restaurant.id">{{restaurant.name}}</option>
+        </select>
+      </div>
+    </form>
+</app-nav-bar>
+<div class="fluid-container" style="margin-top: 5px">
+
+  <div class="row">
+    <div class="col s12 no-padding">
+      <ul class="tabs" materialize="tabs">
+        <li class="tab col s4 "><a class="active teal-text" href="#Recibido">Recibido</a></li>
+        <li class="tab col s4 "><a class="teal-text" href="#Cocinado">Cocinando</a></li>
+        <li class="tab col s4 "><a class="teal-text" href="#Enviado">Enviado</a></li>
+        <div class="indicator teal" style="z-index:1"></div>
+      </ul>
+    </div>
+    <div id="Recibido" class="col s12">
+
+      <div *ngFor="let order of orders | async |orderFilter:['PAID']">
+        <app-order [order]="order"></app-order>
+      </div>
+    </div>
+    <div id="Cocinado" class="col s12">
+      <div *ngFor="let order of orders | async |orderFilter:'COOKING'">
+        <app-order [order]="order"></app-order>
+      </div>
+    </div>
+    <div id="Enviado" class="col s12">
+      <div *ngFor="let order of orders | async |orderFilter:'SENDED'">
+        <app-order [order]="order"></app-order>
+      </div>
+    </div>
+  </div>
+</div>
+

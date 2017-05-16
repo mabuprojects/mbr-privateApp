@@ -1,0 +1,28 @@
+.side-entry {
+  line-height: 3rem;
+  font-size: 1.5rem;
+}
+
+.sidebar-entry {
+  font-size: 2rem;
+}
+
+.center-icon {
+  margin-left: -7px;
+}
+
+.short-link{
+  padding-left: 19px;
+}
+
+.sidebar-label{
+  top: -8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.collection-wrapper{
+  height: 36px;
+}
+
+

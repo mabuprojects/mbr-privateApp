@@ -1,0 +1,5 @@
+<div class="collection">
+  <a *ngFor="let employee of employees | async" class="collection-item" [routerLink]="employee.id" routerLinkActive="active">
+    <span class="title">{{employee.name}}</span>
+  </a>
+</div>

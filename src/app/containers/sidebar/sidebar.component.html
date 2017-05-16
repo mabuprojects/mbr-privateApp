@@ -1,0 +1,37 @@
+<div [class.small-side-bar]="smallBar">
+  <div class="sidebar hide-on-small-and-down " [@panelWidthTrigger]="state"  (@panelWidthTrigger.done)="smallBarDone($event)" (@panelWidthTrigger.start)="smallBarStart($event)"  >
+    <div class="top separatorBorder">
+      <div class="sidebar-toggle">
+        <a style="cursor: pointer" (click)="changeSideBar()" #button><img class="responsive-img" style="margin-left: -3px;" src="assets/resources/mabu.svg"></a>
+
+      </div>
+      <span *ngIf="showText" class="mabuRestaurantTitle"> Mabu Restaurant</span>
+    </div>
+    <div class="sidebar-content-scroll" >
+      <div class="sidebar-content separatorBorder">
+        <div class="row no-margin collection no-border">
+
+          <app-sidebar-entry [name]="'Main Page'" [link]="'/mainpage'" [icon]="'dashboard'"
+                             [short]="showText" ></app-sidebar-entry>
+          <app-sidebar-entry [name]="'Pedidos'" [link]="'/order'" [short]="showText" [icon]="'input'" ></app-sidebar-entry>
+          <app-sidebar-entry [name]="'Restaurantes'" [link]="'/restaurant'"  [icon]="'store'" [short]="showText"></app-sidebar-entry>
+          <app-sidebar-entry [name]="'Productos'" [link]="'/product'" [short]="showText" [icon]="'list'"></app-sidebar-entry>
+          <app-sidebar-entry [name]="'Categorias'" [link]="'/category'" [short]="showText" [icon]="'view_quilt'"></app-sidebar-entry>
+          <app-sidebar-entry [name]="'Impuestos'" [link]="'/taxe'" [short]="showText" [icon]="'payment'"></app-sidebar-entry>
+          <app-sidebar-entry [name]="'Usuarios'" [link]="'/user'" [short]="showText" [icon]="'contacts'" ></app-sidebar-entry>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-content" [@panelPaddingTrigger]="state">
+    <ng-content></ng-content>
+  </div>
+
+
+</div>
+
+
+
+

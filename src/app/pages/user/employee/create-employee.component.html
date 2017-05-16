@@ -1,0 +1,48 @@
+<h4 >{{openMode==='EDIT'?'Editando':'Nuevo Empleado'}}</h4>
+<div class="row section-divider"></div>
+<mbr-error-card [(error)]=error [errorMessage]=errorMessage></mbr-error-card>
+
+<form materialize [formGroup]="employeeForm" (ngSubmit)="onSubmit()" novalidate>
+  <div class="row">
+
+    <div class="input-field col s6 m6 l6">
+      <input id="email" type="email" formControlName="email" [inputvalidate]="employeeForm.controls['email']">
+      <label for="email" data-error="El email no es correcto">Email*</label>
+    </div>
+
+    <div *ngIf="openMode === 'NEW'" class="input-field col s12 m6 l6">
+      <input id="password" type="password" formControlName="password" [inputvalidate]="employeeForm.controls['password']">
+      <label for="password" data-error="La contraseña no puede ser vacío y debe tener 6 carácteres">Password*</label>
+
+    </div>
+
+    <div class="input-field col s12 m6 l6">
+      <input id="name" type="text" formControlName="name"  [inputvalidate]="employeeForm.controls['name']">
+      <label for="name" data-error="El nombre no puede ser vacío">Name*</label>
+
+    </div>
+    <br>
+
+
+    <div formArrayName="roles" class="col s12">
+      <p *ngFor="let role of roles.controls; let i=index" [formGroupName]="i" class="collection-item">
+        <input type="checkbox" id="role{{i}}" value="role.checked"  formControlName="checked"/>
+        <label for="role{{i}}">{{role.controls['name'].value}}</label>
+      </p>
+    </div>
+
+
+    <div class="col s12">
+      <div style="display:flex;justify-content:flex-end;align-items:flex-end;">
+        <button type="submit" class="btn btn-success">Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+<a (click)="triggerToast()" materialize [materializeParams]="['Empleado registrado',4000]"
+   [materializeActions]="toastCreateActions"></a>
+<a (click)="triggerToast()" materialize [materializeParams]="['Empleado actualizado',4000]"
+   [materializeActions]="toastUpdateActions"></a>

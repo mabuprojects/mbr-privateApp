@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:200,300,400,500,600');
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  font-family: 'Raleway', sans-serif;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+-------------------------------------Font size-----------------------------------------
+
+
+/*-------------------------------------Margin Styles-------------------------------------*/
+/**!*/
+.margin-top {
+  margin-top: 2%;
+}
+
+.no-margin{
+  margin: 0px;
+}
+.no-margin-bottom{
+  margin-bottom: 0px;
+}
+
+/*
+-------------------------------------Padding Styles-------------------------------------
+*/
+.no-padding{
+  padding: 0px;
+}
+
+.small-padding-sides{
+  padding: 0px 10px;
+}
+
+
+.border{
+  border: 1px solid #9d9d9d;
+}
+
+.navbar-grad {
+  background: red; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(rgba(0, 108, 255, 0.49),rgb(0, 255, 157)); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(rgba(0, 108, 255, 0.49),rgb(0, 255, 157)); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(rgba(0, 108, 255, 0.49),rgb(0, 255, 157)); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(rgba(255, 255, 255, 0.20),rgba(136, 136, 136, 0.2)); /* Standard syntax */
+}
+
+.section-divider {
+  background-color: #26a69a;
+  height: 3px;
+  margin-bottom: 10px;
+}
+
+blockquote {
+  border-color: #26a69a;
+}
+
+.close-button{
+  position: absolute;
+  top: 2px;
+  right: 2px;
+}
+
+.layout{
+  display: none;
+}
+
+label[data-error]:after {
+  white-space: nowrap;
+}
+
+.no-margin{
+  margin:0px;
+}
+.no-padding{
+  padding: 0px;
+}

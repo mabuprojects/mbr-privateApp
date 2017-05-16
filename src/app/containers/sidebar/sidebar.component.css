@@ -1,0 +1,72 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 240px;
+  padding-bottom: 65px;
+  background: white;
+  font-size: 1rem;
+  z-index: 1000;
+  transform: translate3d(0, 0, 0);
+}
+
+.sidebar .top, body {
+  overflow: hidden;
+}
+
+.sidebar-content-scroll {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.sidebar-content {
+  position: absolute;
+  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.sidebar-toggle {
+
+  display: inline-block;
+  height: 65px;
+  line-height: 65px;
+  text-align: center;
+  width: 60px;
+  transition: background-color .3s
+}
+
+@media only screen and (max-width: 600px) {
+  .main-content {
+    padding-left: 0px !important;
+  }
+}
+
+.sidebar-entry {
+  font-size: 1.2em;
+  margin-right: 5px;
+  width: 2em;
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+.no-border {
+  border: none;
+  border-radius: 0px;
+}
+
+.separatorBorder {
+  border-right: solid 3px #26a69a;
+}
+
+.mabuRestaurantTitle {
+  top: 20px;
+  position: absolute !important;
+}

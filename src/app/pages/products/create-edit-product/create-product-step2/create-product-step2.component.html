@@ -1,0 +1,89 @@
+<!-------------------------------------------- PRODUCTO --------------------------------------------------->
+<form [formGroup]="productForm"  novalidate>
+
+  <!--------------------------------------------DETALLES DE PRODUCTO --------------------------------------------------->
+
+  <div class="row ">
+    <div class="col l6">
+      <blockquote>
+        <h5>Restaurantes</h5>
+        <p>Añada los restaurantes que dispondrán de este producto</p>
+      </blockquote>
+    </div>
+    <div class="col l6">
+      <br>
+      <br>
+      <a class="waves-effect waves-light btn center right" (click)="addProductDetails()">Añadir restaurante</a>
+    </div>
+  </div>
+
+
+  <div formArrayName="productDetails">
+    <div *ngFor="let productDetail of producproductCartFormtDetails.controls; let i=index" [formGroupName]="i">
+
+      <div class="card hoverable col s12">
+
+        <div class="col right valign-wrapper">
+          <div class="valign">
+            <button class="btn waves-effect waves-light red small-padding-sides testStepDelete"
+                    (click)="deleteProductDetails(i)" type="button">
+              <i class="material-icons">delete</i>
+            </button>
+          </div>
+        </div>
+
+        <div class="col s12">
+          <div class="input-field col s6">
+            <select id="restaurantId" materialize="material_select" formControlName="restaurantId"
+                    [materializeSelectOptions]="selectOptions">
+              <option value="" disabled selected>Seleccione un restaurante</option>
+              <option *ngFor="let restaurant of restaurants" [value]="restaurant.id">{{restaurant.name}}</option>
+            </select>
+            <label for="restaurantId" data-error="Incorrecto">Restaurante*</label>
+          </div>
+
+          <div class="input-field col s6">
+            <select id="states" materialize="material_select" formControlName="state"
+                    [materializeSelectOptions]="selectOptions">
+              <option value="" disabled selected>Seleccione un estado</option>
+              <option *ngFor="let state of states" [value]="state">{{state}}</option>
+            </select>
+            <label for="states" data-error="Incorrecto">Estado*</label>
+          </div>
+
+          <div class="input-field col s6">
+            <input id="price" type="number" formControlName="price"
+                   [class.valid]="controlValid('price', productDetail)"
+                   [class.invalid]="controlInvalid('price', productDetail)">
+            <label for="price" data-error="Debe ser mayor que 0">Precio (€)*</label>
+          </div>
+
+          <div class="input-field col s6">
+            <input id="mainPage" type="number" formControlName="mainPage"
+                   [class.valid]="controlValid('mainPage', productDetail)"
+                   [class.invalid]="controlInvalid('mainPage', productDetail)">
+            <label for="mainPage" data-error="Debe ser mayor o igual que 0">Orden en la web*</label>
+          </div>
+          <br>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--------------------------------------------BOTONERA SUBMIT--------------------------------------------------->
+
+  <div class="col s12">
+    <button (click)="back()" class="btn btn-success">Atrás</button>
+
+    <button type="submit" (click)="onSubmit()"
+            [disabled]="formStep2Disable()" class="btn btn-success">Siguiente
+    </button>
+    &nbsp;
+    <p>Form value: {{ productForm.value | json }}</p>
+    <p>Form status: {{ productForm.status | json }}</p>
+  </div>
+
+
+</form>

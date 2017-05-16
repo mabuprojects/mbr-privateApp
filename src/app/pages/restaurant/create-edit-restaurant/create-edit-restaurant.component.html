@@ -1,0 +1,233 @@
+<app-nav-bar [title]="openMode==='EDIT'?'Editando':'Nuevo Restaurante'" [back]="true">
+
+</app-nav-bar>
+<div style="margin-top: 10px">
+  <div class="col s12">
+    <mbr-error-card [(error)]=error [errorMessage]=errorMessage></mbr-error-card>
+  </div>
+
+  <form [formGroup]="restaurantForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="row">
+      <div class="input-field col s6">
+        <input id="name" type="text" formControlName="name"
+               [inputvalidate]="restaurantForm.controls['name']">
+        <label for="name" data-error="Incorrecto">Name*</label>
+
+        <!--<p>Form value: {{ restaurantForm.controls['name'].valid | json }}</p>-->
+      </div>
+
+      <div class="input-field col s6">
+        <input id="nif" type="text" formControlName="nif"
+               [inputvalidate]="restaurantForm.controls['nif']">
+        <label for="nif" data-error="Incorrecto">Nif*</label>
+      </div>
+
+      <div class="input-field col s6">
+        <input id="email" type="email" formControlName="email"
+               [inputvalidate]="restaurantForm.controls['email']">
+        <label for="email" data-error="Incorrecto">Email*</label>
+
+        <!--<p>Form value: {{ restaurantForm.controls['name'].valid | json }}</p>-->
+      </div>
+
+
+      <div class="col l12">
+        <blockquote>
+          <h5>Servicios</h5>
+        </blockquote>
+      </div>
+
+      <div formArrayName="services" class="col s12">
+        <div class="row">
+          <div class="col s6 m4 l3" collection-item *ngFor="let service of servicesControls.controls; let i=index"
+               [formGroupName]="i">
+            <p><input type="checkbox" id="service{{i}}" value="service.checked" formControlName="checked"/>
+              <label for="service{{i}}">{{service.controls['name'].value}}</label>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-field col s6">
+        <div class="chips chips-initial" id="chips" materialize="material_chip"
+             (chip.add)="add($event.detail)" (chip.delete)="delete($event.detail)"
+             [materializeParams]="[chipsInit]"></div>
+        <label for="chips">Introduce los codigos postales pulsando intro</label>
+      </div>
+
+      <div class="input-field col s6">
+        <input id="minPriceDelivery" type="number" formControlName="minPriceDelivery"
+               [inputvalidate]="restaurantForm.controls['minPriceDelivery']">
+        <label for="minPriceDelivery" data-error="Debe ser mayor que 0">Precio mínimo para entrega
+          a domicio (€)*</label>
+      </div>
+
+      <div class="input-field col s6">
+        <input id="transportPrice" type="number" formControlName="transportPrice"
+               [inputvalidate]="restaurantForm.controls['transportPrice']">
+        <label for="transportPrice" data-error="Debe ser mayor que 0">Precio transporte(€)*</label>
+      </div>
+
+      <div class="input-field col s6">
+        <input id="phoneNumber" type="number" formControlName="phoneNumber"
+               [inputvalidate]="restaurantForm.controls['phoneNumber']">
+        <label for="phoneNumber" data-error="Incorrecto">Número de teléfono</label>
+      </div>
+
+      <div class="input-field col s6">
+        <input type="checkbox" id="visible" formControlName="visible"/>
+        <label for="visible">Visible</label>
+      </div>
+
+      <div class="col l12">
+        <blockquote>
+          <h5>Dirección</h5>
+          <p>Añada la dirección del restaurante.</p>
+        </blockquote>
+      </div>
+
+
+      <div formGroupName="address">
+
+        <div class="input-field col s6">
+          <input id="street" type="text" formControlName="street"
+                 [inputvalidate]="addressForm.controls['street']">
+          <label for="street" data-error="Incorrecto" data-success="right">Calle*</label>
+        </div>
+
+
+        <div class="input-field col s6">
+          <input id="number" type="text" formControlName="number"
+                 [inputvalidate]="addressForm.controls['number']">
+          <label for="number" data-error="Incorrecto" data-success="right">Número*</label>
+        </div>
+
+        <div class="input-field col s6">
+          <input id="unity" type="text" formControlName="unity"
+                 [inputvalidate]="addressForm.controls['unity']">
+          <label for="unity" data-error="Incorrecto" data-success="right">Unidad*</label>
+        </div>
+
+        <div class="input-field col s6">
+          <input id="postalCode" type="text" formControlName="postalCode"
+                 [inputvalidate]="addressForm.controls['postalCode']">
+          <label for="postalCode" data-error="Incorrecto" data-success="right">Código Postal*</label>
+        </div>
+
+        <div class="input-field col s6">
+          <input id="city" type="text" formControlName="city"
+                 [inputvalidate]="addressForm.controls['city']">
+          <label for="city" data-error="Incorrecto" data-success="right">Provincia*</label>
+        </div>
+
+        <div class="input-field col s6">
+          <input id="state" type="text" formControlName="state"
+                 [inputvalidate]="addressForm.controls['state']">
+          <label for="state" data-error="Incorrecto" data-success="right">Comunidad autónoma*</label>
+        </div>
+
+        <div class="input-field col s6">
+          <input id="country" type="text" formControlName="country"
+                 [inputvalidate]="addressForm.controls['country']">
+          <label for="country" data-error="Incorrecto" data-success="right">País*</label>
+        </div>
+
+
+        <div class="input-field col s6">
+          <input id="observations" type="text" formControlName="observations"
+                 [inputvalidate]="addressForm.controls['observations']">
+          <label for="observations" data-error="Incorrecto" data-success="right">Observaciones*</label>
+        </div>
+
+
+      </div>
+
+
+      <div class="col l12">
+        <blockquote>
+          <h5>Horario</h5>
+          <p>Añada los horarios del restaurante.</p>
+        </blockquote>
+      </div>
+        <div class="row" formGroupName="timeTable">
+
+          <table class="centered ">
+            <thead>
+            <tr>
+              <th>Dia</th>
+              <th>Abierto a la mañana</th>
+              <th>Hora de Apertura</th>
+              <th>Hora de ultima reserva</th>
+              <th>Abierto a la tarde</th>
+              <th>Hora de Apertura</th>
+              <th>Hora de ultima reserva</th>
+            </tr>
+            </thead>
+
+            <tbody formArrayName="days" >
+
+            <tr *ngFor="let day of days.controls; let i=index" [formGroupName]="i" >
+              <td>{{day.controls['day'].value}}</td>
+              <td>
+                <div class="switch"><label>No<input type="checkbox" formControlName="openMorning"> <span class="lever"></span>Sí </label></div>
+              </td>
+              <td><div class="input-field ">
+                <select  [attr.disabled]="!day.controls['openMorning'].value?'':null" formControlName="openingMorning" materialize="material_select">
+                  <option *ngFor="let hour of morningHours" [value]="hour.value">{{hour.name}}</option>
+                </select>
+              </div></td>
+              <td>
+                <div class="input-field ">
+                  <select  [attr.disabled]="!day.controls['openMorning'].value?'':null" formControlName="lastHourToMorningBook" materialize="material_select">
+                    <option *ngFor="let hour of morningHours | timeTableFilter:day.controls['openingMorning'].value" [value]="hour.value">{{hour.name}}</option>
+                  </select>
+                </div>
+                </td>
+              <td>
+                <div class="switch"><label>No<input type="checkbox" formControlName="openDinner"><span class="lever"></span>Sí </label></div>
+              </td>
+              <td><div class="input-field ">
+                <select  [attr.disabled]="!day.controls['openDinner'].value?'':null" formControlName="openingDinner" materialize="material_select">
+                  <option *ngFor="let hour of dinnerHours" [value]="hour.value">{{hour.name}}</option>
+                </select>
+              </div></td>
+              <td><div class="input-field ">
+                <select  [attr.disabled]="!day.controls['openDinner'].value?'':null" formControlName="lastHourToDinnerBook" materialize="material_select">
+                  <option *ngFor="let hour of dinnerHours | timeTableFilter:day.controls['openingDinner'].value" [value]="hour.value">{{hour.name}}</option>
+                </select>
+              </div></td>
+            </tr>
+
+
+
+            </tbody>
+          </table>
+
+      </div>
+    </div>
+
+    <!--------------------------------------------BOTONERA SUBMIT--------------------------------------------------->
+    <div class="row">
+
+      <div class="col s12">
+
+
+        <button type="submit"
+                [disabled]="restaurantForm.invalid" class="btn btn-success">Save
+        </button>
+        &nbsp;
+
+        <button type="reset" (click)="revert(restaurantForm)"
+                [disabled]="restaurantForm.pristine" class="btn btn-danger">Revert
+        </button>
+      </div>
+
+    </div>
+  </form>
+
+
+  <a (click)="triggerToast()" materialize [materializeParams]="['Restaurante creado',4000]"
+     [materializeActions]="toastCreateActions"></a>
+  <a (click)="triggerToast()" materialize [materializeParams]="['Restaurante actualizado',4000]"
+     [materializeActions]="toastUpdateActions"></a>
+</div>

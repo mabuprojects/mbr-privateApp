@@ -1,0 +1,136 @@
+
+
+<!-------------------------------------------- PRODUCTO --------------------------------------------------->
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()" novalidate>
+  <div class="row">
+    <div class="input-field col l6">
+      <input id="name" type="text" formControlName="name"
+             [class.valid]="controlValid('name', productForm)"
+             [class.invalid]="controlInvalid('name', productForm)"
+      >
+      <label for="name" data-error="Incorrecto">Nombre*</label>
+    </div>
+
+
+    <div class="input-field col l6">
+      <input id="description" type="text" formControlName="description"
+             [class.valid]="controlValid('description', productForm)"
+             [class.invalid]="controlInvalid('description', productForm)">
+      <label for="description" data-error="Incorrecto">Descripcion*</label>
+    </div>
+
+    <div class="input-field col l6">
+      <select id="category" materialize="material_select" formControlName="category"
+              [materializeSelectOptions]="selectOptions">
+        <option value="" disabled selected>Seleccione una categoria</option>
+        <option *ngFor="let category of categories | async" [value]="category.id">{{category.name}}</option>
+      </select>
+      <label for="category" data-error="Incorrecto">Categoria*</label>
+    </div>
+
+    <div class="input-field col l6">
+      <select id="taxe" materialize="material_select" formControlName="taxe"
+              [materializeSelectOptions]="selectOptions">
+        <option value="" disabled selected>Seleccione un impuesto</option>
+        <option *ngFor="let taxe of taxes | async" [value]="taxe.id">{{taxe.name}}</option>
+      </select>
+      <label for="taxe" data-error="Incorrecto">Impuesto*</label>
+    </div>
+
+
+    <!--------------------------------------------OPCIONES DE PRODUCTO --------------------------------------------------->
+    <div class="row">
+      <div class="col l6">
+        <blockquote>
+          <h5>Opciones</h5>
+          <p>Añada las diferentes opciones de personalización que tiene un producto (Ej: tamaño, ingrediente
+            especial)</p>
+        </blockquote>
+      </div>
+      <div class="col l6">
+        <br>
+        <br>
+        <a class="waves-effect waves-light btn center right" (click)="addOptions()">Añadir opción</a>
+      </div>
+    </div>
+
+    <div formArrayName="options" class="well well-lg">
+      <div *ngFor="let option of options.controls; let optionIndex=index" [formGroupName]="optionIndex">
+
+        <div class="card hoverable col s12">
+          <div class="col right valign-wrapper">
+            <div class="valign">
+              <button class="btn waves-effect waves-light red small-padding-sides testStepDelete"
+                      (click)="deleteOptions(optionIndex)" type="button">
+                <i class="material-icons">delete</i>
+              </button>
+            </div>
+          </div>
+
+          <div class="col s12">
+            <div class="input-field col s6">
+              <input id="nameOption" type="text" formControlName="name"
+                     [class.valid]="controlValid('name', option)"
+                     [class.invalid]="controlInvalid('name', option)">
+              <label for="nameOption" data-error="Incorrecto">Nombre de la opción*</label>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col l6">
+              <blockquote>
+                <h6>Escoge los diferentes valores para la opción</h6>
+              </blockquote>
+            </div>
+            <div class="col l6">
+              <a class="waves-effect waves-light btn center right" (click)="addOptionLines(optionIndex)">Añadir
+                valor</a>
+            </div>
+          </div>
+
+
+
+            <div formArrayName="optionLines">
+              <div *ngFor="let optionLine of getOptionLines(optionIndex).controls; let optionLineIndex=index"
+                   [formGroupName]="optionLineIndex">
+
+                <div class="row">
+
+                  <div class="col l6">
+                    <div class="input-field">
+                      <input id="nameOptionLine" type="text" formControlName="name"
+                             [class.valid]="controlValid('name', optionLine)"
+                             [class.invalid]="controlInvalid('name', optionLine)">
+                      <label for="nameOptionLine" data-error="Incorrecto">Nombre*</label>
+                    </div>
+                  </div>
+
+                  <div class=" col l6">
+                    <br>
+                      <i (click)="deleteOptionLines(optionIndex,optionLineIndex)"
+                         class="material-icons left">delete</i>
+                    </div>
+
+                </div>
+              </div>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col s12">
+    <button type="submit"
+            [disabled]="formStep1Disable()" class="btn btn-success">Siguiente
+    </button>
+    &nbsp;
+    <p>Form value: {{ productForm.value | json }}</p>
+    <p>Form status: {{ productForm.status | json }}</p>
+  </div>
+
+
+</form>
+
+
+

@@ -1,0 +1,76 @@
+<!-------------------------------------------- PRODUCTO --------------------------------------------------->
+<form [formGroup]="productForm" novalidate>
+
+  <!--------------------------------------------DETALLES DE PRODUCTO --------------------------------------------------->
+  <div *ngFor="let pd of productForm.value.productDetails">
+
+    <div class="card hoverable col l12">
+
+      <div class="col l6">
+        <blockquote>
+          <h5>{{getRestaurantName(pd.restaurantId)}}</h5>
+          <p>Añada los precios de las opciones del producto asociadas a este restaurante.</p>
+        </blockquote>
+      </div>
+
+      <div formArrayName="options" class="well well-lg">
+        <div *ngFor="let option of options.controls; let optionIndex=index" [formGroupName]="optionIndex">
+
+          <h5 class="col l12">{{option.value.name}}</h5>
+
+          <div formArrayName="optionLines">
+            <div *ngFor="let optionLine of getOptionLines(optionIndex).controls; let optionLineIndex=index"
+                 [formGroupName]="optionLineIndex">
+
+              <div formArrayName="optionLinePrices">
+                <div
+                  *ngFor="let optionLinePrice of getOptionLinePrices(optionIndex, optionLineIndex).controls; let optionLinePriceIndex=index"
+                  [formGroupName]="optionLinePriceIndex">
+                  <div *ngIf="pd.restaurantId === optionLinePrice.value.restaurantId">
+                    <div clas="row">
+                      <div class=" col l6">
+                        <h6>{{optionLine.value.name}}</h6>
+                      </div>
+                      <div class="input-field col l6">
+                        <input id="priceAdded" type="number" formControlName="priceAdded"
+                               [class.valid]="controlValid('priceAdded', optionLinePrice)"
+                               [class.invalid]="controlInvalid('priceAdded', optionLinePrice)">
+                        <label for="priceAdded" data-error="Debe ser mayor que 0">Precio (€)*</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--------------------------------------------BOTONERA SUBMIT--------------------------------------------------->
+  <div class="row">
+    <div class="col s12">
+      <mbr-error-card [(error)]=error [errorMessage]=errorMessage></mbr-error-card>
+    </div>
+    <div class="col s12">
+
+      <button (click)="back()" class="btn btn-success">Atrás</button>
+
+      <button type="submit" (click)="onSubmit()"
+              [disabled]="productForm.invalid" class="btn btn-success">Siguiente
+      </button>
+      &nbsp;
+      <p>Form value: {{ productForm.value | json }}</p>
+      <p>Form status: {{ productForm.status | json }}</p>
+    </div>
+
+  </div>
+
+
+</form>
+
+<a (click)="triggerToast()" materialize [materializeParams]="['Producto creado',4000]"
+   [materializeActions]="toastActions"></a>

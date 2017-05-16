@@ -1,0 +1,74 @@
+<app-nav-bar [title]="'Restaurantes'">
+</app-nav-bar>
+
+
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large red">
+    <i class="large material-icons">store</i>
+  </a>
+  <ul>
+    <li><a class="btn-floating green" [routerLink]="'/restaurant/new'"><i class="material-icons">add</i></a></li>
+    <li><a class="btn-floating blue darken-1" (click)="refresh()"><i class="material-icons">replay</i></a></li>
+  </ul>
+</div>
+<!--------------------------------------------   DELETE ERROR  --------------------------------------------------->
+
+<mbr-error-card [(error)]=error [errorMessage]=errorMessage></mbr-error-card>
+
+<!--------------------------------------------   CATEGORIES LIST  --------------------------------------------------->
+
+<div class="col s12">
+
+  <div class="col s12 ">
+    <ul materialize="collapsible" class="collapsible" data-collapsible="accordion">
+      <li *ngFor="let restaurant of restaurants | async">
+        <div class="collapsible-header">
+
+          {{restaurant.name}}
+
+          <button class="btn waves-effect waves-light red small-padding-sides right "
+                  (click)="deleteRestaurant(restaurant.id)" type="button">
+            <i class="small material-icons small-icon">delete</i>
+          </button>
+
+          <button class="btn waves-effect waves-light blue small-padding-sides right "
+                  [routerLink]="['/restaurant/edit',restaurant.name]" type="button">
+            <i class="small material-icons small-icon">mode_edit</i>
+          </button>
+
+        </div>
+        <div class="collapsible-body row" >
+          <div class="col s12 m4">
+          <p>Nif: {{restaurant.nif}} </p>
+          <br>
+          <p>Servicios: <span style="margin: 0px 10px;" *ngFor="let service of restaurant.services">{{service}} </span>
+          </p>
+          <br>
+          <p>Precio mínimo de entrega: {{restaurant.minPriceDelivery}}</p>
+          <br>
+          <p>Precio transporte: {{restaurant.transportPrice}}</p>
+          <br>
+          <p>Dirección</p>
+          <br>
+          <p>{{restaurant.address.number}}, {{restaurant.address.unity}}, {{restaurant.address.street}},
+            {{restaurant.address.postalCode}}, {{restaurant.address.country}} , {{restaurant.address.state}},
+            {{restaurant.address.city}}</p>
+          </div>
+          <div class="col s12 m8" style="height: 50vh">
+            <angular2-fullcalendar [options]="calendarOptions"></angular2-fullcalendar>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+<!--------------------------------------------   TOASTS  --------------------------------------------------->
+
+<a (click)="triggerToast()" materialize [materializeParams]="['Restaurante eliminada',4000]"
+   [materializeActions]="toastDeleteActions"></a>
+
+
+<a (click)="triggerToast()" materialize [materializeParams]="['Restaurantes actualizados',4000]"
+   [materializeActions]="toastUpdateActions"></a>

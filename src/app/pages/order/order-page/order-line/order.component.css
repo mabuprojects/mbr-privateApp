@@ -1,0 +1,30 @@
+.block {
+  overflow: hidden;
+  -webkit-transition: height .5s;
+  transition: height .5s;
+}
+
+.custom-card-content {
+  display: flex;
+}
+
+@media only screen and (max-width: 600px) {
+  .custom-card-content {
+    padding: 10px;
+  }
+
+  .right-disable {
+    margin-left: 0px;
+  }
+}
+
+@media only screen and (min-width: 601px) {
+  .inline-med-hig {
+    display: inline-block;
+    margin-right: 10px;
+  }
+}
+
+.span-margin {
+  margin-left: 3%;
+}

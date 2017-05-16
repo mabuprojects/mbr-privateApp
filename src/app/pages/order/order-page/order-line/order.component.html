@@ -1,0 +1,37 @@
+<div class="col s12 no-padding">
+  <div class="card lighten-3" style="cursor: pointer;">
+    <div class="card-content custom-card-content " (click)="height = height ? 0 : el.scrollHeight">
+      <div class="col s9 m8 l9 no-padding">
+        <span>Nº {{order.id}}</span>
+        <span
+          class="span-margin">{{order.address.street + " " + order.address.number + " " + order.address.unity}}</span>
+        <span class="span-margin hide-on-small-and-down">Tiempo Restante: {{(whatTime|async)?.hours}} horas {{(whatTime|async)?.min}} min </span>
+        <span class="span-margin">{{order.totalPrice}} €</span>
+      </div>
+      <div class="col s3 m4 l3 no-padding">
+        <a *ngIf="order.status=='PAID' || order.status=='NOPAID'" (click)="changeState()" class="waves-effect waves-light btn right"><i
+          class="material-icons right right-disable">local_dining</i><span class="hide-on-small-and-down">Cocinar</span></a>
+        <a *ngIf="order.status=='COOKING'" (click)="changeState()" class="waves-effect waves-light btn right"><i
+          class="material-icons right right-disable">send</i><span class="hide-on-small-and-down">Enviar</span></a>
+        <a *ngIf="order.status=='SENDED'" (click)="changeState()" class="waves-effect waves-light btn right"><i
+          class="material-icons right right-disable">beenhere</i><span
+          class="hide-on-small-and-down">Finalizar</span></a>
+      </div>
+    </div>
+    <div class=" block" [style.height]="height + 'px'" #el>
+      <div class="card-action" *ngIf="order.orderLines.length>0">
+        <div *ngFor="let orderLine of order.orderLines">
+          <div class="row no-padding">
+            <div class="col s2 l1 no-padding">
+              <img style="max-height: 50px" class="responsive-img" src="{{imageUrl}}/product/{{orderLine.productImage}}">
+            </div>
+            <div class="col s10 l11 no-padding">
+              <h5 class="inline-med-hig">{{orderLine.quantity}} {{orderLine.productName}}</h5>
+              <span *ngFor="let orderOption of orderLine.optionLinePrices">{{orderOption.optionName}}: {{orderOption.chossenOptionName}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

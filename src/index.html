@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>MrPrivate</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="./assets/resources/favicon.ico">
+  <meta name="theme-color" content="#00695c">
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--<link href="./styles.css" rel="stylesheet">-->
+</head>
+<body>
+<app-root><style>
+
+  .body-loader {
+    border: 1px solid #f3f3f3;
+    /* Light grey */
+    border-top: 1px solid #00695c;
+    /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    30% {
+      transform: rotate(180deg);
+    }
+    60% {
+      transform: rotate(360deg);
+    }
+    80% {
+      transform: rotate(540deg);
+    }
+    100% {
+      transform: rotate(720deg);
+    }
+  }
+
+  .centrado {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+
+  my-app:empty + .loading {
+    opacity: 1;
+    z-index: 100;
+  }
+</style>
+  <div class="fluid-container loading">
+    <div class="body-loader centrado " style=""></div>
+  </div></app-root>
+</body>
+</html>
